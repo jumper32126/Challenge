@@ -15,7 +15,7 @@
   //$_SESSION['tell']= $tell ;
   //$_SESSION['comment']= $comment;
 
-  echo  var_dump($_POST['year']);
+  //echo  var_dump($_POST['year']);
   ?>
     <form action="<?php echo INSERT_CONFIRM ?>" method="POST">
     名前:
@@ -31,37 +31,31 @@
     <select name="year">
         <option value="">----</option>  <!--課題2 空文字として送る-->
         <?php
-        for($i=1950; $i<=2010; $i++){ ?>
-        <option value = "<?php
-        if(empty($_POST['year'])){
-          echo $i;
-        }else{
-              echo       $i == $_POST['year'] ?> "selected" <?php ;}  ?>" >
-              <?php echo $i;?></option>
-        <?php } ?>
+        for($i=1950; $i<=2010; $i++){ ?>  <!--課題4 保持する-->
+        <option value = "<?php echo $i; ?>" <?php if (isset($_POST['year']) && $i==$_POST['year']){echo 'selected';}?>>
+              <?php echo $i;?> </option><?php;}?>
     </select>年
     <select name="month">
         <option value="">--</option>   <!--課題2 空文字として送る-->
         <?php
-        for($i = 1; $i<=12; $i++){?>
-        <option value="<?php echo $i;?>"><?php echo $i;?></option>
-
-        <?php } ;?>
+        for($i = 1; $i<=12; $i++){?>  <!--課題4 保持する-->
+        <option value ="<?php echo $i;?>"<?php if (isset($_POST['month'])&& $i==$_POST['month']){echo 'selected';}?>>
+        <?php echo $i;?> </option><?php ;} ?>
     </select>月
     <select name="day">
         <option value="">--</option>   <!--課題2 空文字として送る-->
         <?php
-        for($i = 1; $i<=31; $i++){ ?>
-        <option value="<?php echo $i; ?>"><?php echo $i;?></option>
-        <?php } ?>
+        for($i = 1; $i<=31; $i++){ ?> <!--課題4 保持する-->
+        <option value="<?php echo $i;?>"<?php if(isset($_POST['day'])&& $i==$_POST['day']){echo 'selected';} ?>>
+        <?php echo $i;?> </option><?php ;} ?>
     </select>日
     <br><br>
-
+<?php $_POST['type'] = '種別';?> <!-- 初めてページに飛んだ時に未定義を回避-->
     種別:
-    <br>
-    <input type="radio" name="type" value="エンジニア"checked>エンジニア<br>
-    <input type="radio" name="type" value="営業">営業<br>
-    <input type="radio" name="type" value="その他">その他<br>
+    <br> <!--課題4 保持する-->
+    <input type="radio" name="type" value="エンジニア"<?php if(($_POST['type'])=="エンジニア"){echo 'checked';}?>>エンジニア<br>
+    <input type="radio" name="type" value="営業"<?php if(($_POST['type'])=="営業"){echo 'checked';}?>>営業<br>
+    <input type="radio" name="type" value="その他"<?php if(($_POST['type'])=="その他"){echo 'checked';}?>>その他<br>
     <br>
 
     電話番号:

@@ -1,3 +1,4 @@
+<?php session_start();?> <!-- session_start();を移動-->
 <?php require_once '../common/defineUtil.php'; ?>
 <?php require_once '../common/scriptUtil.php'; ?> <!--課題1-->
 <!DOCTYPE html>
@@ -20,7 +21,7 @@
         $post_comment = $_POST['comment'];
 echo var_dump($post_birthday);
         //セッション情報に格納
-        session_start();
+        //session_start();
         $_SESSION['name'] = $post_name;
         $_SESSION['birthday'] = $post_birthday;
         $_SESSION['type'] = $post_type;
@@ -49,22 +50,25 @@ echo var_dump($post_birthday);
             <input type="hidden" name="tell" value="<?php echo $post_tell;?>">
             <input type="hidden" name="comment" value="<?php echo $post_comment;?>">
             <input type="hidden" name="year" value="<?php echo $birthday[0];?>">
-
-
+            <input type="hidden" name="month" value="<?php echo $birthday[1];?>">
+            <input type="hidden" name="day" value="<?php echo $birthday[2];?>">
+            <input type="hidden" name="type" value="<?php echo $post_type;?>">
             <input type="submit" name="no" value="登録画面に戻る">
             <?php echo var_dump($birthday[0]);?>
+            <?php echo var_dump($post_type);?>
         </form>
 
     <?php }else{ ?>
         <h1>入力項目が不完全です</h1><br>
         再度入力を行ってください<br>
         <?php // 課題3
-        $arr = array('名前'=>$_POST['name'],'生年月日の年'=>$_POST['year'],'生年月日の月'=>$_POST['month'],'生年月日の日'=>$_POST['day'],'種別'=>$_POST['type'],'電話番号'=>$_POST['tell'],'自己紹介文'=>$_POST['comment']);
-        foreach ($arr as $key => $value) {
-          if(empty($value)) {
-            echo $key.'が未入力です<br>';
-          }
-        }
+        $arr = array('名前'=>$_POST['name'],'生年月日の年'=>$_POST['year'],'生年月日の月'=>$_POST['month'],'生年月日の日'=>$_POST['day'],
+                      '種別'=>$_POST['type'],'電話番号'=>$_POST['tell'],'自己紹介文'=>$_POST['comment']);
+                     foreach ($arr as $key => $value) {
+                       if(empty($value)) {
+                         echo $key.'が未入力です<br>';
+                       }
+                     }
 ?>
 
         <form action="<?php echo INSERT ?>" method="POST">

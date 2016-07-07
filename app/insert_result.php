@@ -19,7 +19,7 @@
 
 
     ?><?php // 課題7 データベースアクセス系の処理をdbaccesUtil.phpに切り離す
-    $insert_db = connect2MySQL(); //db接続を確立 
+    $insert_db = connect2MySQL(); //db接続を確立
  ?>
 
     <h1>登録結果画面</h1><br>
